@@ -14,7 +14,7 @@ function submitData(name, email) {
     };
 
 
-     fetch("http://localhost:3000/users", configObj)
+     return fetch("http://localhost:3000/users", configObj)
      .then(function(response) {
         return response.json();
       })
@@ -25,18 +25,22 @@ function submitData(name, email) {
       })
       .catch(function(error) {
         /*expect to receive an object on error with a property, message*/
+        appendError(error.message)
       })
 
 }
 
 
+const body = document.querySelector('body')
+const errorMsg = document.createElement('p')
+
 function appendToDom(id) {
-    const body = document.querySelector('body')
     body.innerHTML = id
 }
 
 function appendError(message) {
-    const errorMsg = document.createElement('p')
     errorMsg.innerHTML = message
+    body.appendChild(errorMsg)
+    
 }
-submitData('rod', 'blabbla@gmaiol.com')
+submitData('bob', 'bob@bob.com')
